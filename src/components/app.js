@@ -13,6 +13,19 @@ class App extends Component {
         }
     }
 
+    deleteItem(index){
+
+        // const newList = this.state.list.slice()
+
+        const newList = [...this.state.list];
+
+        newList.splice(index, 1);
+
+        this.setState({
+            list: newList
+        });
+    }
+
     addItem(item){
         this.setState({
             list: [item, ...this.state.list]
@@ -20,11 +33,17 @@ class App extends Component {
     }
 
     render(){
+
+        const iconStyle = {
+            fontSize: '42px',
+            verticalAlign: 'bottom'
+        }
+
         return (
             <div className="container">
-                <h1 className="center">To Do List</h1>
+                <h1 className="center">T<i style={iconStyle} className="material-icons">check_circle</i> D<i style={iconStyle} className="material-icons">check_circle</i> List</h1>
                 <AddForm add={this.addItem.bind(this)}/>
-                <List list={this.state.list}/>
+                <List list={this.state.list} delete={this.deleteItem.bind(this)}/>
             </div>
         )
     }
